@@ -11,6 +11,11 @@ class Node:
         # self.set_node_board()
 
 
+    def is_equal(self, other):
+        if self.tiles_list == other.tiles_list:
+            return True
+        return False
+
     def set_node_board(self):
         self.tiles_board = []
         #make a 3x3 board from the tiles_list
@@ -65,3 +70,7 @@ class Node:
         val2 = self.tiles_list[index2]
         self.tiles_list[index1] = val2
         self.tiles_list[index2] = val1
+
+
+    def get_value(self):
+        return self.value
