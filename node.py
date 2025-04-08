@@ -8,13 +8,11 @@ class Node:
         self.is_initial = is_initial
         self.is_goal = is_goal
         self.tiles_list = tiles_list
-        # self.set_node_board()
+        self.set_node_board()
 
 
     def is_equal(self, other):
-        if self.tiles_list == other.tiles_list:
-            return True
-        return False
+        return self.tiles_list == other.tiles_list
 
     def set_node_board(self):
         self.tiles_board = []

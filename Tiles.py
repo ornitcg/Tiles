@@ -1,4 +1,5 @@
 import argparse
+from bfs import *
 from node import *
 def get_tiles_from_user():
     parser = argparse.ArgumentParser(description="Process some tiles.")
@@ -21,7 +22,8 @@ def is_list_valid(tiles_list):
 
 
 if __name__ == "__main__":
-    tiles_list = get_tiles_from_user()
+    # tiles_list = get_tiles_from_user()
+    tiles_list = [2,3,6,8,7,1,5,0,4]  # Example input
     # print("Tiles list:", tiles_list)  #TODO DEBUG REMOVE
     if not is_list_valid(tiles_list):
         print("ERROR: Invalid list of tiles. Please provide a list of numbers from 0 to 8 next time. bye bye!")
@@ -30,4 +32,8 @@ if __name__ == "__main__":
     start_node = Node(tiles_list, is_initial=True)
     start_node.display_as_board()
     print("Valid list of tiles.")
-    # start = node()
+
+    bfs = BFS(start_node, Node(GOAL_STATE))
+    final = bfs.bf_search()
+    print("Final node:")
+    final.display_as_board()
