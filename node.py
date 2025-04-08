@@ -1,36 +1,48 @@
 from constants import *
 
 class Node:
-    def __init__(self, tiles_list, is_initial=False, is_goal=False, parent=None, cause=None, value=0):
+    def __init__(self, tiles_list, is_initial=False, is_goal=False, parent=None, cause=None, value=0, number_tile=None):
         self.parent = parent
         self.cause = cause
         self.value = value
         self.is_initial = is_initial
         self.is_goal = is_goal
+        self.number_tile_that_moved = number_tile
         self.tiles_list = tiles_list
-        self.set_node_board()
+        self.tiles_board = []
 
 
-    def is_equal(self, other):
+
+
+    def __hash__(self):
+        return hash(tuple(self.tiles_list))  #for the set
+
+    def __eq__(self, other):
+        if not isinstance(other, Node):
+            return False
         return self.tiles_list == other.tiles_list
 
-    def set_node_board(self):
+    def set_node_board(self): # used for nice display for debugging
         self.tiles_board = []
-        #make a 3x3 board from the tiles_list
-        for i in range(0, BOARD_SIZE , BOARD_SIDE):
+        for i in range(0, BOARD_SIZE , BOARD_SIDE):  # create the board 3X3
             self.tiles_board.append(self.tiles_list[i:i + BOARD_SIDE])
 
+    # display for debugging
     def display_as_board(self):
+        self.set_node_board()
         for row in self.tiles_board:
             print(row)
         print()
 
+    # display for assignment
+    def display_as_moved_tile(self):
+        print(self.number_tile_that_moved)
 
 
     def action(self, cause ):
         row, col = self.get_blank_tile_position()
-        new_row = row
-        new_col = col
+        new_row = row  #of the number tile
+        new_col = col  #of the number tile
         if cause == UP:
                 new_row = row-1
         elif cause == DOWN:
@@ -41,8 +53,10 @@ class Node:
                 new_col = col+1
 
         if self.is_valid_coordinate(new_row, new_col): #the new row and col
-            neighbor = Node(self.tiles_list, parent=self, cause=cause, value=self.value + 1)
+            neighbor = Node(self.tiles_list.copy(), parent=self, cause=cause, value=self.value + 1)
             neighbor.swap_tiles(row, col, new_row, new_col)
+            tile_number = neighbor.tiles_list[row * BOARD_SIDE + col]
+            neighbor.set_number_tile_that_moved(tile_number)
             return neighbor
         else:
             return None
@@ -72,3 +86,12 @@ class Node:
 
     def get_value(self):
         return self.value
+
+
+    def set_number_tile_that_moved(self, number_tile):
+        self.number_tile_that_moved = number_tile
+
+
+    def get_parent(self):
+        return self.parent
+

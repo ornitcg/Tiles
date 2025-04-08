@@ -23,17 +23,24 @@ def is_list_valid(tiles_list):
 
 if __name__ == "__main__":
     # tiles_list = get_tiles_from_user()
-    tiles_list = [2,3,6,8,7,1,5,0,4]  # Example input
+    # tiles_list = [2,3,6,8,7,1,5,0,4]  # Example input  #no solution found
+    # tiles_list = [2,0,6,8,7,1,5,3,4]  # Example input
+    tiles_list = [0,6,3,8,7,1,5,2,4]  # Example input
+
     # print("Tiles list:", tiles_list)  #TODO DEBUG REMOVE
     if not is_list_valid(tiles_list):
         print("ERROR: Invalid list of tiles. Please provide a list of numbers from 0 to 8 next time. bye bye!")
         exit()
 
     start_node = Node(tiles_list, is_initial=True)
-    start_node.display_as_board()
-    print("Valid list of tiles.")
 
-    bfs = BFS(start_node, Node(GOAL_STATE))
-    final = bfs.bf_search()
-    print("Final node:")
-    final.display_as_board()
+    bfs = BFS(start_node, Node(GOAL_STATE, is_goal=True))
+    final = bfs.breadth_first_search()
+    if final is None:
+        print("No solution found.")
+    else:
+        #stack nodes from goal node
+        solution_list = bfs.stack_nodes(final)
+        for node in solution_list:
+            node.display_as_moved_tile()
+            node.display_as_board()
