@@ -4,7 +4,7 @@ from node import *
 from heuristic import *
 from a_star import *
 from state_space import *
-
+from cost_func import *
 
 def get_tiles_from_user():
     parser = argparse.ArgumentParser(description="Process some tiles.")
@@ -71,9 +71,9 @@ if __name__ == "__main__":
             print() #line down
 
             heuristic = Heuristic( goal_state)
-
+            cost_func = Cost_Function()
             # run the A* algorithm
-            a_star = A_star(state_space, start_state, heuristic.max_dim_dist_heuristic)
+            a_star = A_star(state_space, start_state, heuristic.max_dim_dist_heuristic, cost_func)
             last_node = a_star.a_star_search()
             display_output(a_star, last_node)
 

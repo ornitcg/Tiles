@@ -2,10 +2,12 @@
 from constants import *
 from node import *
 from transition_model import *
+from cost_func import *
 
 class State_Space:
     def __init__(self):
         self.transition_model = Transition_Model()
+        self.cost_func = Cost_Function()
 
 
     def get_initial_state(self, tiles_list):
@@ -49,8 +51,5 @@ class State_Space:
                 neighbors.append(neighbor)
         return neighbors
 
-    # get the cost of the action (each move costs 1)
-    def get_cost(self, node, action, successor):
-        return  action.get_cost()
 
 

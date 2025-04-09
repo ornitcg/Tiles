@@ -3,12 +3,13 @@ from heuristic import *
 from transition_model import *
 
 class A_star:
-    def __init__(self, state_space, start_node, heuristic_func):
+    def __init__(self, state_space, start_node, heuristic_func, cost_func):
         self.alg_name = A_STAR
         self.state_space = state_space
         self.start_node = start_node
         self.goal_node = state_space.get_goal_state()
         self.heuristic_func = heuristic_func
+        self.cost_func = cost_func
         self.tiles_path = []
         self.visited = set()
         self.min_heap = PriorityQueue()
@@ -33,7 +34,9 @@ class A_star:
             # add neighbors to the heap
             for neighbor in neighbors:
                 if neighbor not in self.visited:
-                    priority = neighbor.value + self.heuristic_func(neighbor)
+                    #g_cost is the cost to get so far
+                    g_cost = current_node.get_value() + self.cost_func.calculate(current_node,neighbor.get_cause() ,neighbor)
+                    priority = g_cost + self.heuristic_func(neighbor)
                     self.min_heap.add_or_update(neighbor, priority)
 
     def track_path(self, goal):
