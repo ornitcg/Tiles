@@ -26,13 +26,13 @@ class State_Space:
         row, col = node.get_blank_tile_position()
 
         if row > 0:  # Can move UP
-            valid_actions.append(UP)
+            valid_actions.append(Action(UP))
         if row < BOARD_SIDE - 1:  # Can move DOWN
-            valid_actions.append(DOWN)
+            valid_actions.append(Action(DOWN))
         if col > 0:  # Can move LEFT
-            valid_actions.append(LEFT)
+            valid_actions.append(Action(LEFT))
         if col < BOARD_SIDE - 1:  # Can move RIGHT
-            valid_actions.append(RIGHT)
+            valid_actions.append(Action(RIGHT))
 
         return valid_actions
 
@@ -51,6 +51,6 @@ class State_Space:
 
     # get the cost of the action (each move costs 1)
     def get_cost(self, node, action, successor):
-        return 1
+        return  action.get_cost()
 
 

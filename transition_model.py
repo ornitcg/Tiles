@@ -1,5 +1,6 @@
 from node import *
 from constants import *
+from action import *
 
 class Transition_Model:
 #
@@ -17,14 +18,14 @@ class Transition_Model:
     def apply_action(self, node, action):
         row, col = node.get_blank_tile_position()
         new_row, new_col = row, col
-
-        if action == UP:
+        direction = action.get_direction()
+        if direction == UP:
             new_row = row - 1
-        elif action == DOWN:
+        elif direction == DOWN:
             new_row = row + 1
-        elif action == LEFT:
+        elif direction == LEFT:
             new_col = col - 1
-        elif action == RIGHT:
+        elif direction == RIGHT:
             new_col = col + 1
 
         # is new position (of empty tile) valid?
