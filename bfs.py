@@ -4,24 +4,25 @@ from node import *
 
 class BFS:
     def __init__(self, start_node, goal_node):
+        self.alg_name = BF_SEARCH
         self.start_node = start_node
         self.goal_node = goal_node
         self.tiles_path = []
+        self.visited = set()
+        self.queue = []
 
     def breadth_first_search(self):
-        queue = []
-        visited = set()
-        queue.append(self.start_node)
+        self.queue.append(self.start_node)
 
-        while queue:
-            current_node = queue.pop(0)
-            if current_node in visited:  # check if this was already expanded
+        while self.queue:
+            current_node = self.queue.pop(0)
+            if current_node in self.visited:  # check if this was already expanded
                 continue
-            visited.add(current_node)
+            self.visited.add(current_node)
             if current_node == self.goal_node:
                 self.track_path(current_node)
                 return current_node
-            queue.extend(Transiton_Model().get_neighbors(current_node))
+            self.queue.extend(Transiton_Model().get_neighbors(current_node))
 
 
 
@@ -37,7 +38,13 @@ class BFS:
         #stack nodes from goal node
         current = final
         path = []
-        while current.parent is not None:
+        while current:
             path.insert(0, current)
             current = current.get_parent()
         return path
+
+    def get_visited_nodes_count(self):
+        return len(self.visited)
+
+    def get_name(self):
+        return self.alg_name

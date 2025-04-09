@@ -36,7 +36,8 @@ class Node:
 
     # display for assignment
     def display_as_moved_tile(self):
-        print(self.number_tile_that_moved)
+        if not self.number_tile_that_moved is None:
+            print(self.number_tile_that_moved, end=' ')
 
 
     def action(self, cause ):
@@ -95,3 +96,5 @@ class Node:
     def get_parent(self):
         return self.parent
 
+    def get_tiles_list(self):
+        return self.tiles_list
