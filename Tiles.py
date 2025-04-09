@@ -1,7 +1,7 @@
 import argparse
 from bfs import *
 from node import *
-from huristic import *
+from heuristic import *
 from a_star import *
 from state_space import *
 

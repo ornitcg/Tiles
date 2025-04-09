@@ -3,10 +3,10 @@ from constants import *
 from node import *
 
 class BFS:
-    def __init__(self, start_node, goal_node):
+    def __init__(self, state_space, start_node):
         self.alg_name = BF_SEARCH
+        self.state_space = state_space
         self.start_node = start_node
-        self.goal_node = goal_node
         self.tiles_path = []
         self.visited = set()
         self.queue = []
@@ -22,7 +22,7 @@ class BFS:
             if current_node == self.goal_node:
                 self.track_path(current_node)
                 return current_node
-            self.queue.extend(Transiton_Model().get_neighbors(current_node))
+            self.queue.extend(self.state_space.get_neighbors(current_node))
 
 
 

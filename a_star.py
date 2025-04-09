@@ -1,5 +1,5 @@
 from priority_queue import *
-from huristic import *
+from heuristic import *
 from transition_model import *
 
 class A_star:
