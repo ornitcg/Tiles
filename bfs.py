@@ -19,7 +19,7 @@ class BFS:
             if current_node in self.visited:  # check if this was already expanded
                 continue
             self.visited.add(current_node)
-            if current_node == self.goal_node:
+            if current_node == self.state_space.get_goal_state():
                 self.track_path(current_node)
                 return current_node
             self.queue.extend(self.state_space.get_neighbors(current_node))

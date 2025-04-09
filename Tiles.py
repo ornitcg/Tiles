@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
             print() #line down
 
-            heuristic = Heuristic(start_state, goal_state)
+            heuristic = Heuristic( goal_state)
 
             # run the A* algorithm
             a_star = A_star(state_space, start_state, heuristic.max_dim_dist_heuristic)

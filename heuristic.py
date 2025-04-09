@@ -2,7 +2,7 @@ from constants import *
 
 
 class Heuristic:
-    def __init__(self, goal_state=GOAL_STATE):
+    def __init__(self,  goal_state=GOAL_STATE):
         self.goal_state = goal_state
 
 
@@ -11,6 +11,7 @@ class Heuristic:
     #  This is not Manhattan distance, but  is inspired by it.
     def max_dim_dist_heuristic(self, state_node):
         state = state_node.get_tiles_list()
+        goal_state = self.goal_state.get_tiles_list()
         total_distance = 0
         board_side = BOARD_SIDE
 
