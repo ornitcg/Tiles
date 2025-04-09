@@ -40,32 +40,29 @@ class Node:
             print(self.number_tile_that_moved, end=' ')
 
 
-    def action(self, cause ):
-        row, col = self.get_blank_tile_position()
-        new_row = row  #of the number tile
-        new_col = col  #of the number tile
-        if cause == UP:
-                new_row = row-1
-        elif cause == DOWN:
-                new_row = row+1
-        elif cause == LEFT:
-                new_col = col-1
-        elif cause == RIGHT:
-                new_col = col+1
+    # def action(self, cause ):
+    #     row, col = self.get_blank_tile_position()
+    #     new_row = row  #of the number tile
+    #     new_col = col  #of the number tile
+    #     if cause == UP:
+    #             new_row = row-1
+    #     elif cause == DOWN:
+    #             new_row = row+1
+    #     elif cause == LEFT:
+    #             new_col = col-1
+    #     elif cause == RIGHT:
+    #             new_col = col+1
+    #
+    #     if self.is_valid_coordinate(new_row, new_col): #the new row and col
+    #         neighbor = Node(self.tiles_list.copy(), parent=self, cause=cause, value=self.value + 1)
+    #         neighbor.swap_tiles(row, col, new_row, new_col)
+    #         tile_number = neighbor.tiles_list[row * BOARD_SIDE + col]
+    #         neighbor.set_number_tile_that_moved(tile_number)
+    #         return neighbor
+    #     else:
+    #         return None  # TODO REMOVE
 
-        if self.is_valid_coordinate(new_row, new_col): #the new row and col
-            neighbor = Node(self.tiles_list.copy(), parent=self, cause=cause, value=self.value + 1)
-            neighbor.swap_tiles(row, col, new_row, new_col)
-            tile_number = neighbor.tiles_list[row * BOARD_SIDE + col]
-            neighbor.set_number_tile_that_moved(tile_number)
-            return neighbor
-        else:
-            return None
 
-
-
-    def is_valid_coordinate(self, x, y):
-        return 0 <= x < BOARD_SIDE and 0 <= y < BOARD_SIDE
 
     def get_blank_tile_position(self):
         for i in range(BOARD_SIZE):

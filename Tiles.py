@@ -3,8 +3,7 @@ from bfs import *
 from node import *
 from huristic import *
 from a_star import *
-import time
-
+from state_space import *
 
 
 def get_tiles_from_user():
@@ -53,23 +52,28 @@ if __name__ == "__main__":
     tiles_list = get_tiles_from_user()  # comment this and uncomment one of the next lines to test
     # tiles_list = [2,3,6,8,7,1,5,0,4]  # Example input  # no solution found
     # tiles_list = [2,0,6,8,7,1,5,3,4]  # Example input  # has solution
-    # tiles_list = [0,6,3,8,7,1,5,2,4]  # Example input  # has solution
+    # tiles_list = [1,0,2,3,4,8,6,5,7]  # Example input  # has solution 7 steps
 
     # print("Tiles list:", tiles_list)  #TODO DEBUG REMOVE
     try:
         if is_list_valid(tiles_list):
-            start_node = Node(tiles_list, is_initial=True)
-            goal_state = Node(GOAL_STATE, is_goal=True)
+            # start_node = Node(tiles_list, is_initial=True)
+            state_space = State_Space()
+            start_state = state_space.get_initial_state(tiles_list)
+            goal_state = state_space.get_goal_state()
+
 
             # run the BFS algorithm
-            bfs = BFS(start_node, goal_state)
+            bfs = BFS(state_space, start_state)
             last_node = bfs.breadth_first_search()
             display_output(bfs, last_node)
 
             print() #line down
 
+            heuristic = Heuristic(start_state, goal_state)
+
             # run the A* algorithm
-            a_star = A_star(start_node, goal_state, heuristic)
+            a_star = A_star(state_space, start_state, heuristic.max_dim_dist_heuristic)
             last_node = a_star.a_star_search()
             display_output(a_star, last_node)
 
