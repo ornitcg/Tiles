@@ -65,9 +65,9 @@ if __name__ == "__main__":
 
 
             # run the BFS algorithm
-            # bfs = BFS(state_space, start_state)  # TODO uncomment
-            # last_node = bfs.breadth_first_search()  # TODO uncomment
-            # display_output(bfs, last_node)  # TODO uncomment
+            bfs = BFS(state_space, start_state)  # TODO uncomment
+            last_node = bfs.breadth_first_search()  # TODO uncomment
+            display_output(bfs, last_node)  # TODO uncomment
 
             print() #line down
 
