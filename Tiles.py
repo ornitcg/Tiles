@@ -33,9 +33,8 @@ def is_list_valid(tiles_list):
 
 
 def display_output(alg, last_node):
-    print("1. Algorithm: ", alg.get_name())
-    print("2. Number of expanded nodes: ", alg.get_visited_nodes_count())
-    print("3. Path of moves: ", end=' ')
+    print("Algorithm: ", alg.get_name())
+    print("Path : ", end=' ')
     if last_node is None:
         print("No solution found.")
     else:
@@ -44,7 +43,9 @@ def display_output(alg, last_node):
         for node in solution_list:
             node.display_as_moved_tile()
             # node.display_as_board()
-
+    print()
+    print("Path length: ", len(alg.tiles_path))
+    print("Expanded: ", alg.get_visited_nodes_count())
 
 
 # Entry point of the program
@@ -64,22 +65,23 @@ if __name__ == "__main__":
 
 
             # run the BFS algorithm
-            bfs = BFS(state_space, start_state)
-            last_node = bfs.breadth_first_search()
-            display_output(bfs, last_node)
+            # bfs = BFS(state_space, start_state)  # TODO uncomment
+            # last_node = bfs.breadth_first_search()  # TODO uncomment
+            # display_output(bfs, last_node)  # TODO uncomment
 
             print() #line down
 
             heuristic = Heuristic( goal_state)
             cost_func = Cost_Function()
             # run the A* algorithm
-            a_star = A_star(state_space, start_state, heuristic.max_dim_dist_heuristic, cost_func)
+            a_star = A_star(state_space, start_state, heuristic.manhattan_plus_linear_conflict, cost_func)
             last_node = a_star.a_star_search()
             display_output(a_star, last_node)
 
     except ValueError as e:
         print(f"ERROR: Invalid list of tiles : {e}")
         exit()
+
 
 
 
