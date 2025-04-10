@@ -3,16 +3,6 @@ from constants import *
 from action import *
 
 class Transition_Model:
-#
-#     def get_neighbors(self, node):
-#         neighbors = []
-#         for action in ACTIONS:
-#            neighbor = node.action(action)
-#            if neighbor is not None:
-#                neighbors.append(neighbor)
-#         return neighbors
-#
-# class Transition_Model:
 
     # Returns the neighbor node after applying the action
     def apply_action(self, node, action):

@@ -5,6 +5,7 @@ class Heuristic:
     def __init__(self,  goal_state=GOAL_STATE):
         self.goal_state = goal_state
 
+    # The Linear conflict calculation part
     def count_linear_conflicts(self, state_node):
         conflicts = 0
         goal_tiles = self.goal_state.get_tiles_list()
@@ -12,7 +13,6 @@ class Heuristic:
         # Convert to 2D array for easier processing
         board_2d = state_node.get_tiles_2D()
         goal_2d = self.goal_state.get_tiles_2D()
-
 
         # Check each row for tiles that belong in this row
         for board_row in board_2d:
@@ -50,6 +50,21 @@ class Heuristic:
         return conflicts
 
 
+    # Helper function for conflicts calculation
+    def count_conflicts_in_list(self, state_tiles):
+        conflicts = 0
+        for i in range(len(state_tiles)):
+            for j in range(i + 1, len(state_tiles)):
+                # pos are the positions of the tiles in the goal row
+                tile1, pos1 = state_tiles[i]
+                tile2, pos2 = state_tiles[j]
+
+                # Check if tiles are in conflict
+                if pos1 > pos2:
+                    conflicts += 1
+
+        return conflicts
+
 
 
     # The heuristic function that combines Manhattan distance and linear conflict
@@ -74,25 +89,11 @@ class Heuristic:
                 # Add Manhattan distance for this tile
                 manhattan = abs(current_row - goal_row) + abs(current_col - goal_col)
                 total_distance += manhattan
-
         # Now calculate linear conflicts
         conflicts = self.count_linear_conflicts(state_node)
-
+        price = total_distance + (2 * conflicts)
         # Each conflict requires 2 additional moves
-        return total_distance + (2 * conflicts)
+        return price
 
 
-    def count_conflicts_in_list(self, state_tiles):
-        conflicts = 0
-        for i in range(len(state_tiles)):
-            for j in range(i + 1, len(state_tiles)):
-                # pos are the positions of the tiles in the goal row
-                tile1, pos1 = state_tiles[i]
-                tile2, pos2 = state_tiles[j]
-
-                # Check if tiles are in conflict
-                if pos1 > pos2:
-                    conflicts += 1
-
-        return conflicts
 
