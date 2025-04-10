@@ -50,9 +50,9 @@ def display_output(alg, last_node):
 
 # Entry point of the program
 if __name__ == "__main__":
-    tiles_list = get_tiles_from_user()  # comment this and uncomment one of the next lines to test
+    # tiles_list = get_tiles_from_user()  # comment this and uncomment one of the next lines to test
     # tiles_list = [2,3,6,8,7,1,5,0,4]  # Example input  # no solution found
-    # tiles_list = [2,0,6,8,7,1,5,3,4]  # Example input  # has solution
+    tiles_list = [2,0,6,8,7,1,5,3,4]  # Example input  # has solution
     # tiles_list = [1,0,2,3,4,8,6,5,7]  # Example input  # has solution 7 steps
 
     # print("Tiles list:", tiles_list)  #TODO DEBUG REMOVE
@@ -65,9 +65,9 @@ if __name__ == "__main__":
 
 
             # run the BFS algorithm
-            bfs = BFS(state_space, start_state)  # TODO uncomment
-            last_node = bfs.breadth_first_search()  # TODO uncomment
-            display_output(bfs, last_node)  # TODO uncomment
+            # bfs = BFS(state_space, start_state)  # TODO uncomment
+            # last_node = bfs.breadth_first_search()  # TODO uncomment
+            # display_output(bfs, last_node)  # TODO uncomment
 
             print() #line down
 

@@ -9,7 +9,7 @@ class Node:
         self.is_goal = is_goal
         self.number_tile_that_moved = number_tile
         self.tiles_list = tiles_list
-        self.tiles_board = []
+        self.tiles_2D = []
 
 
 
@@ -22,15 +22,16 @@ class Node:
             return False
         return self.tiles_list == other.tiles_list
 
-    def set_node_board(self): # used for nice display for debugging
-        self.tiles_board = []
+    def set_2D_board(self): # used for nice display for debugging
+        self.tiles_2D = []
         for i in range(0, BOARD_SIZE , BOARD_SIDE):  # create the board 3X3
-            self.tiles_board.append(self.tiles_list[i:i + BOARD_SIDE])
+            self.tiles_2D.append(self.tiles_list[i:i + BOARD_SIDE])
 
     # display for debugging
     def display_as_board(self):
-        self.set_node_board()
-        for row in self.tiles_board:
+        if not self.tiles_2D:
+            self.set_2D_board()
+        for row in self.tiles_2D:
             print(row)
         print()
 
@@ -79,3 +80,8 @@ class Node:
 
     def get_cause(self):
         return self.cause
+
+    def get_tiles_2D(self):
+        if not self.tiles_2D:
+            self.set_2D_board()
+        return self.tiles_2D
