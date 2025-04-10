@@ -50,12 +50,11 @@ def display_output(alg, last_node):
 
 # Entry point of the program
 if __name__ == "__main__":
-    # tiles_list = get_tiles_from_user()  # comment this and uncomment one of the next lines to test
+    tiles_list = get_tiles_from_user()  # comment this and uncomment one of the next lines to test
     # tiles_list = [2,3,6,8,7,1,5,0,4]  # Example input  # no solution found
     # tiles_list = [2,0,6,8,7,1,5,3,4]  # Example input  # has solution
-    tiles_list = [1,0,2,3,7,8,6,4,5]  # Example input  15 steps
+    # tiles_list = [1,0,2,3,7,8,6,4,5]  # Example input  15 steps
 
-    # print("Tiles list:", tiles_list)  #TODO DEBUG REMOVE
     try:
         if is_list_valid(tiles_list):
             # start_node = Node(tiles_list, is_initial=True)
