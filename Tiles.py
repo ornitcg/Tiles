@@ -36,7 +36,7 @@ def display_output(alg, last_node):
     print("Algorithm: ", alg.get_name())
     print("Path : ", end=' ')
     if last_node is None:
-        print("No solution found.")
+        print("No solution found.", end='')
     else:
         # stack nodes from goal node
         solution_list = alg.stack_nodes(last_node)
@@ -64,9 +64,9 @@ if __name__ == "__main__":
 
 
             # run the BFS algorithm
-            bfs = BFS(state_space, start_state)  # TODO uncomment
-            last_node = bfs.breadth_first_search()  # TODO uncomment
-            display_output(bfs, last_node)  # TODO uncomment
+            bfs = BFS(state_space, start_state)
+            last_node = bfs.breadth_first_search()
+            display_output(bfs, last_node)
 
             print() #line down
 
